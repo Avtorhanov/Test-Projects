@@ -1,0 +1,82 @@
+{% extends 'master.html' %}
+{% load cart_tag %}
+{% block body %}
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+				<a href="{% url 'cart_clear' %}" class="btn btn-default" style="display: inline-block; text-align: center; background: #FE980F; border: none; border-radius: 0; color: #FFFFFF; display: block; font-family: 'Roboto', sans-serif; padding: 6px 25px; margin-top: 20px;" onmouseover="this.style.background='#ccc'; this.style.color='#333'" onmouseout="this.style.background='#FE980F'; this.style.color='#FFFFFF'">ОЧИСТИТЬ КОРЗИНУ</a>
+				<br>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Товар</td>
+							<td class="description" style="padding-left: 180px;">Описание</td>
+							<td class="price">Цена</td>
+							<td class="quantity">Счетчик</td>
+							<td class="total">Сумма</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+
+                    {% for key,value in request.session.cart.items %}
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{value.image}}" height="200px; alt=" "></a>
+							</td>
+							<td class="cart_description" style="padding-left: 150px;">
+								<h4><a href="">{{value.name}}</a></h4>
+<!--								<p>Web ID: 1089772</p>-->
+							</td>
+							<td class="cart_price">
+								<p>{{value.price}}₽</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href="{% url 'item_increment' value.product_id %}"> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value={{value.quantity}} autocomplete="off" size="2">
+									<a class="cart_quantity_down" href="{% url 'item_decrement' value.product_id %}"> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">{{ value.price|multiply:value.quantity }}₽</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="{% url 'item_clear' key %}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+
+					{% endfor %}
+
+
+					</tbody>
+					<tfoot>
+						<td>
+
+						</td>
+						<td>
+
+							<hr>
+							<h3>{{request.session.cart|length}} Вида Товаров на общую сумму:</h3>
+						</td>
+					<td>
+
+						</td>
+						<td>
+							<hr>
+							<h3>{{cart_total_amount}}₽</h3>
+						</td>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+{% endblock %}
