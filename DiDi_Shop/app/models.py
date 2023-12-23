@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
 from django import forms
 import datetime
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
@@ -17,13 +18,23 @@ class Sub_category(models.Model):
     def __str__(self):
         return self.name
 
+
+class Brand(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
+    Availability = (('В наличии', 'In stock'),('Нет в наличии', 'Out of stock'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False, default='')
     sub_category = models.ForeignKey(Sub_category, on_delete=models.CASCADE, null=False, default='')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='ecommerce/pimg')
     name = models.CharField(max_length=100)
     price = models.IntegerField()
-    date = models.DateField(auto_now_add=True)
+    Availability = models.CharField(choices=Availability, null=True, max_length=100)
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.name
@@ -55,7 +66,6 @@ class UserCreateForm(UserCreationForm):
             raise forms.ValidationError(self.fields['email'].error_message['exists'])
         return self.cleaned_data['email']
 
-
 class Contact_us(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
@@ -67,11 +77,15 @@ class Contact_us(models.Model):
 
 class Order(models.Model):
     image = models.ImageField(upload_to='ecommerce/order/pimg')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.CharField(max_length=1000, default='')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     quantity = models.CharField(max_length=5)
-    price = models.ImageField()
+    price = models.IntegerField(null=True)
     address = models.TextField()
     phone = models.CharField(max_length=10)
-    pincode = models.CharField(max_length=10)
+    pincode = models.CharField(max_length=10, default="")
+    total = models.CharField(max_length=1000, default='')
     date = models.DateField(default=datetime.datetime.today)
+
+    def __str__(self):
+        return self.product

@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-sm-4 col-sm-offset-1">
             <div class="signup-form"><!--login form-->
-                <h2>Login to your Account</h2>
+                <h2>Войти в аккаунт</h2>
                    <form method="post">
                         {% csrf_token %}
                         {% for field in form %}
@@ -13,11 +13,11 @@
                         <label>{{field.label_tag}}</label>
                         <p>{{ field }}</p>
                         {% endfor %}
-                       <a href="{% url 'password_reset' %}" class="btn btn-default" style="float:right; background: #FE980F; border: none; border-radius: 0; color: #FFFFFF; display: block; font-family: 'Roboto', sans-serif; padding: 6px 25px; margin-top: 20px;" onmouseover="this.style.background='#ccc'; this.style.color='#333'" onmouseout="this.style.background='#FE980F'; this.style.color='#FFFFFF'">Forgot password?</a><br>
+                       <a href="{% url 'password_reset' %}" class="btn btn-default" style="float:right; background: #FE980F; border: none; border-radius: 0; color: #FFFFFF; display: block; font-family: 'Roboto', sans-serif; padding: 6px 25px; margin-top: 20px;" onmouseover="this.style.background='#ccc'; this.style.color='#333'" onmouseout="this.style.background='#FE980F'; this.style.color='#FFFFFF'">Забыли пароль?</a><br>
 
 
-                       <button class="btn btn-default" type="submit">Login</button>
-                       <a href="{% url 'signup' %}"><span style="display: inline-block; color: #FFFFFF; background: #FE980F; border: none; border-radius: 0; font-family: 'Roboto', sans-serif; padding: 6px 15px; margin-top: 20px; text-align: center;" onmouseover="this.style.background='#ccc'; this.style.color='#333'" onmouseout="this.style.background='#FE980F'; this.style.color='#FFFFFF'">Create your Account&nbsp;&rarr;</span></a>
+                       <button class="btn btn-default" type="submit">Войти</button>
+                       <a href="{% url 'signup' %}"><span style="display: inline-block; color: #FFFFFF; background: #FE980F; border: none; border-radius: 0; font-family: 'Roboto', sans-serif; padding: 6px 15px; margin-top: 20px; text-align: center;" onmouseover="this.style.background='#ccc'; this.style.color='#333'" onmouseout="this.style.background='#FE980F'; this.style.color='#FFFFFF'">Создать аккаунт&nbsp;&rarr;</span></a>
 
                    </form>
             </div>

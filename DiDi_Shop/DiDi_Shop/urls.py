@@ -40,7 +40,23 @@ urlpatterns = [
     path('cart/cart-detail/', views.cart_detail, name='cart_detail'),
 
     #Contact page
-    path('contact_us', views.Contact_Page, name='contact_page')
+    path('contact_us', views.Contact_Page, name='contact_page'),
+
+    #Checkout page
+    path('checkout/', views.CheckOut, name='checkout'),
+
+    #Order page
+    path('order/', views.Your_Order, name='order'),
+
+    #Product page
+    path('product/', views.Product_page, name='product'),
+
+    #Product detail
+    path('product/<str:id>', views.Product_Detail, name='product_detail'),
+
+    #Search
+    path('search/', views.Search, name='search'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

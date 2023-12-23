@@ -17,7 +17,7 @@
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Товар</td>
-							<td class="description" style="padding-left: 180px;">Описание</td>
+							<td class="description" style="padding-left: 160px;">Описание</td>
 							<td class="price">Цена</td>
 							<td class="quantity">Счетчик</td>
 							<td class="total">Сумма</td>
@@ -64,7 +64,7 @@
 						<td>
 
 							<hr>
-							<h3>{{request.session.cart|length}} Вида Товаров на общую сумму:</h3>
+							<h3>{{request.session.cart|length}} Вида Товара на общую сумму:</h3>
 						</td>
 					<td>
 
@@ -76,7 +76,43 @@
 					</tfoot>
 				</table>
 			</div>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;">Чекнуть</button>
 		</div>
 	</section> <!--/#cart_items-->
+<br>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Новое сообщение</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/checkout/">
+			{% csrf_token %}
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Телефон:</label>
+            <input type="text" name="phone" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Адресс:</label>
+            <textarea class="form-control" name="address" id="message-text"></textarea>
+          </div>
+		  <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Пинкод:</label>
+            <input type="text" name="pincode" class="form-control">
+          </div>
+			<div class="modal-footer">
+		<button type="submit" class="btn btn-primary">Сделать</button>
+	  </div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

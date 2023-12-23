@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-sm-4 col-sm-offset-1">
             <div class="signup-form"><!--login form-->
-                <h2>New User Signup</h2>
+                <h2>Регистрация нового Шопера</h2>
                    <form method="post">
                         {% csrf_token %}
                         {% for field in form %}
@@ -13,7 +13,7 @@
                             <p>{{ field }}</p>
                         {% endfor %}
                         <button class="btn btn-default" type="submit">Signup</button>
-                        <span style="margin-left:100px">Allready have an account</span><a href="{% url 'login' %}"> Log in</a>
+                        <span style="margin-left:100px">У вас уже есть аккаунт</span><a href="{% url 'login' %}"> Войти</a>
                    </form>
             </div>
         </div>
